@@ -4,7 +4,9 @@ const gameDataStore = require('../util/datastore');
 
 var router = express.Router();
 
-/* GET users listing. */
+
+
+/* GET game state by ID. */
 router.get('/game/:gameId', function(req, res, next) {
   const gameId = req.params.gameId;
   const gameState = gameDataStore.getGameState(gameId);

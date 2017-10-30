@@ -5,8 +5,10 @@ const games = [
 	},
 ];
 
+function getGameState(id) {
+	return games.find(game => game.id === id) || null;
+}
+
 module.exports = {
-	getGameState: function(id) {
-		return games.find(game => game.id === id) || null;
-	},
+	getGameState,
 };
