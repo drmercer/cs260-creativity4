@@ -3,9 +3,18 @@
   <head>
     <title><%= title %></title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular.min.js"></script>
+    <script src="/javascripts/index.js" charset="utf-8"></script>
   </head>
-  <body>
+  <body ng-app='app' ng-controller='appCtrl'>
     <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
+
+    <section>
+        <h2>Username:</h2>
+        <input name="username" ng-model='username' required/>
+        <p>Your username is {{username}}</p>
+    </section>
+
+
   </body>
 </html>
