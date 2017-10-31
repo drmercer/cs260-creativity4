@@ -4,8 +4,8 @@ const gameDataStore = require('../util/datastore');
 
 var router = express.Router();
 
-router.get('/game/new/:ownerID', function(req, res, next) {
-  const owner = req.params.ownerID;
+router.get('/game/new/:userId', function(req, res, next) {
+  const owner = req.params.userId;
   res.json(gameDataStore.makeNew(owner));
 });
 
