@@ -4,12 +4,13 @@ const gameDataStore = require('../util/datastore');
 
 var router = express.Router();
 
-router.get('/game/new', function(req, res, next) {
-  res.json(gameDataStore.makeNew());
+router.get('/game/new/:ownerID', function(req, res, next) {
+  const owner = req.params.ownerID;
+  res.json(gameDataStore.makeNew(owner));
 });
 
 /* GET game state by ID. */
-router.get('/game/:gameId', function(req, res, next) {
+router.get('/game/get/:gameId', function(req, res, next) {
   const gameId = req.params.gameId;
   const gameState = gameDataStore.getGameState(gameId);
   if (gameState) {
@@ -17,6 +18,12 @@ router.get('/game/:gameId', function(req, res, next) {
   } else {
     res.status(400).json({ msg: "No game with ID " + gameId })
   }
+});
+
+router.get('/game/list/:userId', function(req, res) {
+  const user = req.params.userId;
+  const games = gameDataStore.listForUser(user);
+  res.json(games);
 });
 
 module.exports = router;
