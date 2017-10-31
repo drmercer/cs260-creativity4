@@ -8,7 +8,7 @@
         const KEY = "uid";
         let id = localStorage.getItem(KEY);
         if (!id) {
-            id = '<%= newDeviceID %>';
+            id = '<%= newUsername %>';
             localStorage.setItem(KEY, id);
         }
         Object.defineProperty(window, 'cp4_global_uid', {
@@ -26,10 +26,8 @@
 
     <section>
         <h2>Username:</h2>
-        <input name="username" ng-model='username' required/>
         <p>
-            Your username is {{username}}. The unique identifier for your
-            browser is <code>{{uid}}</code>
+            Your username is <strong>{{username}}<strong>.
         </p>
     </section>
 

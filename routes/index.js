@@ -6,7 +6,7 @@ var router = express.Router();
 router.get('/', function(req, res, next) {
   res.render('index', {
     title: 'Chip and Dan\'s CP 4',
-    newDeviceID: idgen.random(),
+    newUsername: idgen.random().split('-').slice(1).join(''),
   });
 });
 
