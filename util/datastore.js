@@ -1,4 +1,4 @@
-const idgen = require('human-readable-ids').hri;
+const idgen = require('./idgen');
 
 const games = [
 	{
@@ -9,7 +9,7 @@ const games = [
 
 function makeNew() {
 	const newGame = {
-		id: idgen.random(),
+		id: idgen.newGameID(),
 		history: [],
 	};
 	games.push(newGame);

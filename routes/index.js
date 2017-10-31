@@ -1,12 +1,12 @@
 var express = require('express');
-const idgen = require('human-readable-ids').hri;
+const idgen = require('../util/idgen');
 var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index', {
     title: 'Chip and Dan\'s CP 4',
-    newUsername: idgen.random().split('-').slice(1).join(''),
+    newUsername: idgen.newUsername(),
   });
 });
 
