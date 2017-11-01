@@ -37,15 +37,16 @@
     </section>
 
     <section>
-        <div ng-repeat="g in games | filter:{started:false}">
+        <h2>Your games</h2>
+        <div class="game" ng-repeat="g in games">
             <strong>{{g.id}}:</strong> {{g.players.length}} player<span ng-if="g.players.length > 1">s</span>.
-        </div>
-    </section>
-
-    <section>
-        <div ng-repeat="g in games | filter:{started:true}">
-            <strong>{{g.id}}:</strong> {{g.players.length}} player<span ng-if="g.players.length > 1">s</span>.
-            <a target="_blank" href="/play/{{g.id}}">Play now</a>
+            <div ng-if="g.started">
+                <a target="_blank" href="/play/{{g.id}}">Go to game</a>
+            </div>
+            <div ng-if="!g.started">
+                Waiting for more players to join
+                <button ng-if="g.owner === username">Start game</button>
+            </div>
         </div>
     </section>
 
