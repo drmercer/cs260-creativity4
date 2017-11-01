@@ -1,0 +1,17 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+.connectionErr {
+  margin: 10px;
+  border: 1px solid red;
+  border-radius: 5px;
+  padding: 7px;
+  background-color: salmon;
+  color: red;
+}

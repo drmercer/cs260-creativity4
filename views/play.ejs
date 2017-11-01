@@ -2,7 +2,7 @@
 <html>
   <head>
     <title>Playing game <%= game.id %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel='stylesheet' href='/stylesheets/play.css' />
     <script type="text/javascript">
         // Generates a new ID for the device
         const KEY = "uid";
@@ -27,6 +27,10 @@
   <body ng-app='app' ng-controller='playCtrl'>
 
     <header>Playing game <%= game.id %></header>
+
+    <header class="connectionErr" ng-if="connectionErr">
+        A problem occurred communicating with the server. Please check your connection.
+    </header>
 
   </body>
 </html>
