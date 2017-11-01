@@ -20,6 +20,22 @@ router.get('/game/get/:gameId', function(req, res, next) {
   }
 });
 
+router.get('/game/join/:userId/:gameId', function(req, res) {
+  const user = req.params.userId;
+  const gameId = req.params.gameId;
+  const game = gameDataStore.getGameState(gameId);
+  if (!game) {
+    res.status(400).json({ msg: "No game with ID " + gameId });
+  } else if (game.started) {
+    res.status(400).json({ msg: "Game " + gameId + "has already been started!" });
+  } else if (game.players.includes(user)) {
+    res.status(400).json({ msg: "User " + user + "is already in game " + gameId + "!" });
+  } else {
+    game.players.push(user);
+    res.json(game);
+  }
+});
+
 router.get('/game/list/:userId', function(req, res) {
   const user = req.params.userId;
   const games = gameDataStore.listForUser(user);
