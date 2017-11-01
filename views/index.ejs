@@ -26,7 +26,7 @@
     <h1><%= title %></h1>
 
     <section>
-        <h2>Username:</h2>
+        <h2>Welcome!</h2>
         <p>
             Your username is <strong>{{username}}</strong>.
         </p>
@@ -56,9 +56,12 @@
                 <a target="_blank" href="/play/{{g.id}}">Go to game</a>
             </div>
             <div ng-if="!g.started">
-                Waiting for more players to join
-                <button ng-if="g.owner === username" ng-click="startGame(g.id)">Start game</button>
+                Waiting for more players to join&hellip;
+                <button ng-if="g.owner === username" ng-click="startGame(g.id)">Start game!</button>
             </div>
+        </div>
+        <div class="no-games" ng-if="!games.length">
+            No games :(
         </div>
     </section>
 
