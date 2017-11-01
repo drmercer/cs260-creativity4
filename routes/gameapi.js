@@ -36,9 +36,11 @@ router.get('/game/join/:userId/:gameId', function(req, res) {
   }
 });
 
-router.get('/game/list/:userId', function(req, res) {
+router.get('/game/list/:userId?', function(req, res) {
   const user = req.params.userId;
-  const games = gameDataStore.listForUser(user);
+  const games = user
+    ? gameDataStore.listForUser(user)
+    : gameDataStore.listAllGames();
   res.json(games);
 });
 

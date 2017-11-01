@@ -21,8 +21,13 @@ function listForUser(username) {
 	return games.filter(game => game.players.includes(username));
 }
 
+function listAllGames() {
+	return games;
+}
+
 module.exports = {
 	getGameState,
 	makeNew,
 	listForUser,
+	listAllGames,
 };
