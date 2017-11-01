@@ -32,6 +32,11 @@
     </section>
 
     <section>
+        <h2>Create game</h2>
+        <button ng-click="createGame()">Create a new game</button>
+    </section>
+
+    <section>
         <div ng-repeat="g in games">
             <strong>{{g.id}}:</strong> {{g.players.length}} player<span ng-if="g.players.length > 1">s</span>.
         </div>

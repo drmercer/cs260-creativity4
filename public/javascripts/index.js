@@ -7,7 +7,7 @@ function appCtrl($scope, GameApi) {
 	$scope.username = cp4_global_uid;
   $scope.games = [];
 
-  api.createGame()
+  $scope.createGame = () => api.createGame()
     .then(() => api.listGames())
     .then(games => $scope.games = games);
 }
