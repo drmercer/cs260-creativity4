@@ -5,10 +5,10 @@ function playCtrl($scope, GameApi) {
   const api = new GameApi(cp4_global_uid);
 
   $scope.game = cp4_game;
-  $scope.connectionErr = false;
 
-  // Refresh game every few hundred milliseconds
-  setInterval(refreshGame, 900);
+  // Set up the initial state of the error banner
+  var intervalId;
+  hideErr();
 
   function refreshGame() {
     api.getGame($scope.game.id)
@@ -18,10 +18,20 @@ function playCtrl($scope, GameApi) {
   }
 
   function showErr() {
-    $scope.connectionErr = true;
+    if (!$scope.connectionErr) {
+      $scope.connectionErr = true;
+      // When connection is bad, increase the ping interval
+      clearInterval(intervalId);
+      intervalId = setInterval(refreshGame, 5000);
+    }
   }
 
   function hideErr() {
-    $scope.connectionErr = false;
+    if ($scope.connectionErr !== false) {
+      $scope.connectionErr = false;
+      // Refresh game every few hundred milliseconds
+      clearInterval(intervalId);
+      intervalId = setInterval(refreshGame, 900);
+    }
   }
 }
