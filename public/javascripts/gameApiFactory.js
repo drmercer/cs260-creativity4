@@ -18,6 +18,11 @@ angular
         .then(resp => resp.data);
     },
 
+    joinGame: function(id) {
+      return $http.get(API_ROOT+"join/" + this._user + "/" + id)
+        .then(resp => resp.data);
+    },
+
     startGame: function(gameId) {
       return $http.get(API_ROOT+"start/"+gameId)
         .then(resp => resp.data);

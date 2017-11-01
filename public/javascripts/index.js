@@ -11,6 +11,10 @@ function appCtrl($scope, GameApi) {
   $scope.createGame = () => api.createGame()
     .then(refreshGames)
 
+  $scope.joinGame = form => api.joinGame(form.id)
+    .then(refreshGames)
+    .catch(err => alert(err.data.msg));
+
   $scope.startGame = id => api.startGame(id)
     .then(() => api.listGames())
     .then(games => $scope.games = games);
