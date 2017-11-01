@@ -37,8 +37,15 @@
     </section>
 
     <section>
-        <div ng-repeat="g in games">
+        <div ng-repeat="g in games | filter:{started:false}">
             <strong>{{g.id}}:</strong> {{g.players.length}} player<span ng-if="g.players.length > 1">s</span>.
+        </div>
+    </section>
+
+    <section>
+        <div ng-repeat="g in games | filter:{started:true}">
+            <strong>{{g.id}}:</strong> {{g.players.length}} player<span ng-if="g.players.length > 1">s</span>.
+            <a target="_blank" href="/play/{{g.id}}">Play now</a>
         </div>
     </section>
 
