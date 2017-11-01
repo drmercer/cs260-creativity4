@@ -1,7 +1,7 @@
 angular.module('app', [])
-  .controller('appCtrl', appCtrl)
+  .controller('playCtrl', playCtrl)
 
-function appCtrl($scope, GameApi) {
+function playCtrl($scope, GameApi) {
   const api = new GameApi(cp4_global_uid);
 	$scope.username = cp4_global_uid;
   $scope.games = [];
