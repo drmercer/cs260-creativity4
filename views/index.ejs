@@ -45,7 +45,7 @@
             </div>
             <div ng-if="!g.started">
                 Waiting for more players to join
-                <button ng-if="g.owner === username">Start game</button>
+                <button ng-if="g.owner === username" ng-click="startGame(g.id)">Start game</button>
             </div>
         </div>
     </section>
