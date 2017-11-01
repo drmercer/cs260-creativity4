@@ -51,8 +51,8 @@ router.get('/game/start/:gameId', function(req, res) {
     game.started = true;
     res.json(gameId);
   } else {
-res.status(400).json({ msg: "No game with ID " + gameId })
-}
+    res.status(400).json({ msg: "No game with ID " + gameId })
+  }
 });
 
 module.exports = router;

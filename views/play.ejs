@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Playing game <%= game.id %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script type="text/javascript">
+        // Generates a new ID for the device
+        const KEY = "uid";
+        let id = localStorage.getItem(KEY);
+        if (!id) {
+            id = '<%= newUsername %>';
+            localStorage.setItem(KEY, id);
+        }
+        Object.defineProperty(window, 'cp4_global_uid', {
+            configurable: false,
+            enumerable: false,
+            writable: false,
+            value: id,
+        });
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular.min.js"></script>
+    <script src="/javascripts/index.js" charset="utf-8"></script>
+  </head>
+  <body ng-app='app' ng-controller='appCtrl'>
+
+    <header>Playing game <%= game.id %></header>
+
+  </body>
+</html>
