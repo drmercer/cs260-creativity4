@@ -1,7 +1,7 @@
 angular
 .module('app')
 .factory('GameApi', function($http) {
-  const API_ROOT = 'api/game/';
+  const API_ROOT = '/api/game/';
 
   function GameApi(username) {
     this._user = username;
