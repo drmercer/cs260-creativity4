@@ -19,6 +19,8 @@ function appCtrl($scope, GameApi) {
     .then(() => api.listGames())
     .then(games => $scope.games = games);
 
+  $scope.refreshGames = refreshGames;
+
   function refreshGames() {
     return api.listGames()
       .then(games => $scope.games = games);
