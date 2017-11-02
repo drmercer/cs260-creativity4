@@ -55,4 +55,12 @@ router.get('/game/start/:gameId', function(req, res) {
   }
 });
 
+//======================================================================
+//      Gameplay endpoints
+
+router.put('/game/play/:gameId/takeTurn/', function(req, res) {
+  // TODO: Code this endpoint
+  res.send("Stub!");
+});
+
 module.exports = router;
