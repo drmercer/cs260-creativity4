@@ -7,7 +7,7 @@ const datastore = require('../util/datastore');
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index', {
-    title: 'Chip and Dan\'s CP 4',
+    title: "Liar's Dice",
     newUsername: idgen.newUsername(),
   });
 });
