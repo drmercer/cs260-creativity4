@@ -58,6 +58,13 @@ router.get('/game/start/:gameId', function(req, res) {
 //======================================================================
 //      Gameplay endpoints
 
+router.get('/game/play/:gameId/:userId/dice/', function(req, res) {
+  const gameId = req.params.gameId;
+  const userId = req.params.userId;
+  const dice = gameDataStore.getPlayerDice(gameId, userId);
+  res.json(dice);
+});
+
 router.put('/game/play/:gameId/makeGuess/', function(req, res) {
   // TODO: Code this endpoint
   console.log(req.body);

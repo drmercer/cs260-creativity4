@@ -39,10 +39,17 @@ function listAllGames() {
 	return games;
 }
 
+function getPlayerDice(gameId, playerId) {
+	const game = gamePlayerDice[gameId];
+	if (!game) throw new Error("Game doesn't exist or isn't started")
+	return game[playerId];
+}
+
 module.exports = {
 	getGameState,
 	makeNew,
 	listForUser,
 	startGame,
 	listAllGames,
+	getPlayerDice,
 };
