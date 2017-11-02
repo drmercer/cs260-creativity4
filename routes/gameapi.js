@@ -99,8 +99,7 @@ router.put('/game/play/:gameId/:userId/makeGuess/', function(req, res) {
   }
 
   // Increment turn
-  game.currentTurn++;
-  game.currentTurn %= game.players.length;
+  gameDataStore.incrementGameTurn(gameId);
 
   res.send(game);
 });

@@ -37,9 +37,9 @@ function listForUser(username) {
 function startGame(id) {
 	const game = getGameState(id);
 	game.started = true;
-	const dice = {};
-	game.players.forEach(p => dice[p] = Array(INITIAL_DICE_COUNT));
-	gamePlayerDice[id] = dice;
+	game.playerDiceCounts = {};
+	game.players.forEach(p => game.playerDiceCounts[p] = INITIAL_DICE_COUNT);
+	gamePlayerDice[id] = {};
 	rollDice(id);
 }
 
@@ -48,12 +48,14 @@ function listAllGames() {
 }
 
 function rollDice(id) {
+	const game = getGameState(id);
 	const gameDice = gamePlayerDice[id];
 	if (!gameDice) throw new Error("Game doesn't exist or isn't started");
 
-	Object.keys(gameDice).forEach(p => {
-		gameDice[p] = _rollPlayerDice(gameDice[p].length);
-	});
+	game.players.forEach(p => {
+		const diceLeft = game.playerDiceCounts[p];
+		gameDice[p] = _rollPlayerDice(diceLeft);
+	})
 }
 
 function _rollPlayerDice(count) {
@@ -86,12 +88,31 @@ function isGuessCorrect(gameId, {qty, side}) {
 }
 
 function takeDieFromPlayer(gameId, userId) {
-	gamePlayerDice[gameId][userId] = gamePlayerDice[gameId][userId].slice(1);
+	getGameState(gameId).playerDiceCounts[userId]--;
+}
+
+function incrementGameTurn(gameId, autoCorrect=true) {
+	const game = getGameState(gameId);
+	_incrementGameTurnNoCorrect(game);
+	_correctGameTurn(game);
+}
+
+function _incrementGameTurnNoCorrect(game) {
+	game.currentTurn++;
+  game.currentTurn %= game.players.length;
+}
+
+function _correctGameTurn(game) {
+	while (game.playerDiceCounts[game.players[game.currentTurn]] === 0) {
+		_incrementGameTurnNoCorrect(game);
+	}
 }
 
 function setCurrentTurn(gameId, userId) {
 	const game = getGameState(gameId);
 	game.currentTurn = game.players.indexOf(userId);
+	// Rollover to next player with dice
+	_correctGameTurn(game);
 }
 
 module.exports = {
@@ -104,5 +125,6 @@ module.exports = {
 	rollDice,
 	isGuessCorrect,
 	takeDieFromPlayer,
+	incrementGameTurn,
 	setCurrentTurn,
 };
