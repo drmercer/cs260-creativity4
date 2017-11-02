@@ -1,5 +1,7 @@
 const idgen = require('./idgen');
 
+const INITIAL_DICE_COUNT = 5;
+
 const games = [];
 
 const gamePlayerDice = {};
@@ -31,12 +33,34 @@ function startGame(id) {
 	const game = getGameState(id);
 	game.started = true;
 	const dice = {};
-	game.players.forEach(p => dice[p] = []);
+	game.players.forEach(p => dice[p] = Array(INITIAL_DICE_COUNT));
 	gamePlayerDice[id] = dice;
+	rollDice(id);
 }
 
 function listAllGames() {
 	return games;
+}
+
+function rollDice(id) {
+	const gameDice = gamePlayerDice[id];
+	if (!gameDice) throw new Error("Game doesn't exist or isn't started");
+
+	Object.keys(gameDice).forEach(p => {
+		gameDice[p] = _rollPlayerDice(gameDice[p].length);
+	});
+}
+
+function _rollPlayerDice(count) {
+  const res = [];
+	for (let i = 0; i < count; i++) {
+		res[i] = _randDieVal();
+	}
+	return res;
+}
+
+function _randDieVal() {
+	return Math.floor(Math.random() * 6) + 1;
 }
 
 function getPlayerDice(gameId, playerId) {
@@ -52,4 +76,5 @@ module.exports = {
 	startGame,
 	listAllGames,
 	getPlayerDice,
+	rollDice,
 };
