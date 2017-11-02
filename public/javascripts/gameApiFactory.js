@@ -39,7 +39,8 @@ angular
     },
 
     callBluff: function(gameId) {
-      console.log("stub");
+      return $http.put(API_ROOT+"play/" + gameId + "/" + this._user + "/callBluff/")
+        .then(resp => resp.data);
     },
   };
 

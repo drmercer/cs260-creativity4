@@ -16,13 +16,15 @@ function playCtrl($scope, GameApi) {
       // Call their bluff
       $scope.showObjection = true;
       setTimeout(function(){ $scope.showObjection = false}, 2500);
-      api.callBluff(gameId);
+      api.callBluff(gameId)
+        .catch(err => alert(err.data.msg));
     } else {
       const parts = guess.split(/\s+/);
       const qty = parseInt(parts[0]);
       const side = parseInt(parts[1]);
       // Make a guess
-      api.makeGuess(gameId, {qty, side});
+      api.makeGuess(gameId, {qty, side})
+        .catch(err => alert(err.data.msg));
     }
   }
 
