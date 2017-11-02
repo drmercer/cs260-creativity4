@@ -115,6 +115,26 @@ function setCurrentTurn(gameId, userId) {
 	_correctGameTurn(game);
 }
 
+function isGameOver(gameId) {
+	const game = getGameState(gameId);
+
+	var numOfPlayersWithDice = 0;
+	var lastPlayerWithDice = null;
+	game.players.forEach(player => {
+		if (game.playerDiceCounts[player] !== 0) {
+			numOfPlayersWithDice++;
+			lastPlayerWithDice = player;
+		}
+	});
+
+	if (numOfPlayersWithDice === 1) {
+		game.winner = lastPlayerWithDice;
+		return true;
+	} else {
+		return false;
+	}
+}
+
 module.exports = {
 	getGameState,
 	makeNew,
@@ -127,4 +147,5 @@ module.exports = {
 	takeDieFromPlayer,
 	incrementGameTurn,
 	setCurrentTurn,
+	isGameOver,
 };
