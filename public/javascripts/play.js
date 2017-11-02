@@ -17,6 +17,7 @@ function playCtrl($scope, GameApi) {
       $scope.showObjection = true;
       setTimeout(function(){ $scope.showObjection = false}, 2500);
       api.callBluff(gameId)
+        .then(game => $scope.game = game)
         .catch(err => alert(err.data.msg));
     } else {
       const parts = guess.split(/\s+/);
@@ -24,6 +25,7 @@ function playCtrl($scope, GameApi) {
       const side = parseInt(parts[1]);
       // Make a guess
       api.makeGuess(gameId, {qty, side})
+        .then(game => $scope.game = game)
         .catch(err => alert(err.data.msg));
     }
   }

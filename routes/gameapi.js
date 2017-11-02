@@ -96,7 +96,7 @@ router.put('/game/play/:gameId/:userId/makeGuess/', function(req, res) {
   game.currentTurn++;
   game.currentTurn %= game.players.length;
 
-  res.send("Success");
+  res.send(game);
 });
 
 router.put('/game/play/:gameId/:userId/callBluff/', function(req, res) {
@@ -121,7 +121,7 @@ router.put('/game/play/:gameId/:userId/callBluff/', function(req, res) {
   gameDataStore.takeDieFromPlayer(gameId, loser);
 
   gameDataStore.rollDice(gameId);
-  res.send("Success");
+  res.send(game);
 });
 
 module.exports = router;
