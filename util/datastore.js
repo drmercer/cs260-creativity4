@@ -39,6 +39,7 @@ function startGame(id) {
 	game.started = true;
 	game.playerDiceCounts = {};
 	game.players.forEach(p => game.playerDiceCounts[p] = INITIAL_DICE_COUNT);
+	game.totalDiceLeft = game.players.length * INITIAL_DICE_COUNT;
 	gamePlayerDice[id] = {};
 	rollDice(id);
 }
@@ -88,7 +89,9 @@ function isGuessCorrect(gameId, {qty, side}) {
 }
 
 function takeDieFromPlayer(gameId, userId) {
-	getGameState(gameId).playerDiceCounts[userId]--;
+	const game = getGameState(gameId);
+	game.playerDiceCounts[userId]--;
+	game.totalDiceLeft--;
 }
 
 function incrementGameTurn(gameId, autoCorrect=true) {
