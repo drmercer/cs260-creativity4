@@ -7,7 +7,7 @@ function playCtrl($scope, GameApi) {
   $scope.game = cp4_game;
   const gameId = cp4_game.id;
 
-  $scope.dice = [1,2,3,4,5];
+  $scope.dice = [];
 
   $scope.showObjection = false;
 
@@ -39,7 +39,11 @@ function playCtrl($scope, GameApi) {
 
   function refreshGame() {
     api.getGame($scope.game.id)
-      .then(game => $scope.game = game)
+      .then(game => {
+        $scope.game = game;
+        return api.getMyDice(gameId);
+      })
+      .then(dice => $scope.dice = dice)
       .then(hideErr)
       .catch(showErr);
   }

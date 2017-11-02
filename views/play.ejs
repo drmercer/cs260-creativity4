@@ -40,7 +40,7 @@
 
     <!-- Your Dice section -->
     <section class="your-dice">
-	<div class="dice" ng-repeat="d in dice">
+	<div class="dice" ng-repeat="d in dice track by $index">
 	  <img ng-src="/images/{{d}}-border.gif" height="75px"/>
         </div>
     </section>

@@ -42,6 +42,11 @@ angular
       return $http.put(API_ROOT+"play/" + gameId + "/" + this._user + "/callBluff/")
         .then(resp => resp.data);
     },
+
+    getMyDice: function(gameId) {
+      return $http.get(API_ROOT+"play/" + gameId + "/" + this._user + "/dice/")
+        .then(resp => resp.data);
+    },
   };
 
   return GameApi;
