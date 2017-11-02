@@ -89,6 +89,10 @@ function takeDieFromPlayer(gameId, userId) {
 	gamePlayerDice[gameId][userId] = gamePlayerDice[gameId][userId].slice(1);
 }
 
+function setCurrentTurn(gameId, userId) {
+	game.currentTurn = game.players.indexOf(userId);
+}
+
 module.exports = {
 	getGameState,
 	makeNew,
@@ -99,4 +103,5 @@ module.exports = {
 	rollDice,
 	isGuessCorrect,
 	takeDieFromPlayer,
+	setCurrentTurn,
 };
