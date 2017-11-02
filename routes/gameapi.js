@@ -132,6 +132,9 @@ router.put('/game/play/:gameId/:userId/callBluff/', function(req, res) {
   // Append to history
   game.history.push({userId, type: "call", target: last.userId, loser});
 
+  // Loser goes next
+  game.currentTurn = game.players.indexOf(loser);
+
   gameDataStore.rollDice(gameId);
   res.send(game);
 });
