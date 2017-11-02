@@ -89,7 +89,11 @@ router.put('/game/play/:gameId/:userId/makeGuess/', function(req, res) {
   if (!lastGuess || lastGuess.type === "call") {
     lastGuess = {qty: 0, side: 0}
   }
-  if (lastGuess.qty < qty
+  if (qty > game.totalDiceLeft) {
+	    res.status(400).json({msg: "There aren't even that many dice!"});
+    return;
+  }
+  else if (lastGuess.qty < qty
       || (lastGuess.qty === qty && lastGuess.side < side)) {
     // Add to history
     game.history.push({userId, type: "guess", qty, side});

@@ -5,3 +5,7 @@ a {
 .game {
   margin: 1em;
 }
+
+h1 {
+  text-align: center;
+}
