@@ -33,8 +33,9 @@ angular
         .then(resp => resp.data);
     },
 
-    makeGuess: function(gameId) {
-      console.log("stub");
+    makeGuess: function(gameId, {qty, side}) {
+      return $http.put(API_ROOT+"get/"+gameId, {qty, side})
+        .then(resp => resp.data);
     },
 
     callBluff: function(gameId) {

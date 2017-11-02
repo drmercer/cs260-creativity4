@@ -16,7 +16,7 @@ function playCtrl($scope, GameApi) {
       const qty = parseInt(parts[0]);
       const side = parseInt(parts[1]);
       // Make a guess
-      api.makeGuess({qty, side});
+      api.makeGuess(gameId, {qty, side});
     }
   }
 
