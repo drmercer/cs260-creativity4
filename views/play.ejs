@@ -46,19 +46,10 @@
         </div>
     </section>
 
-    <!-- Game History section -->
-    <section class="game-history">
-        <div class="history" ng-repeat="g in game.history">
-            {{g.userId}}
-            <span class="guess" ng-if="g.type === 'guess'">
-                {{g.qty}} {{g.side}}
-            </span>
-            <span class="guess" ng-if="g.type === 'call'">
-                called out {{g.target}}. <em>{{g.loser}} lost a die.</em>
-            </span>
 
-        </div>
-    </section>
+
+<div class="column-sections">
+  <div class="col">
 
     <!-- Make a Guess section -->
     <section class="make-guess" ng-if="game.players[game.currentTurn] === username">
@@ -76,7 +67,42 @@
         It's <strong>{{game.players[game.currentTurn]}}</strong>'s turn.
     </section>
 
-   <img ng-if="showObjection" src="/images/giphy.gif"/>
+    <!-- Game History section -->
+    <section class="game-history">
+        <div class="history" ng-repeat="g in game.history">
+            {{g.userId}}
+            <span class="guess" ng-if="g.type === 'guess'">
+                {{g.qty}} {{g.side}}
+            </span>
+            <span class="guess" ng-if="g.type === 'call'">
+                called out {{g.target}}. <em>{{g.loser}} lost a die.</em>
+            </span>
+
+        </div>
+    </section>
+  </div>
+
+  <div class="col">
+
+    <img ng-if="showObjection" src="/images/giphy.gif"/>
+
+    <section>
+	<h2>Rules:</h2>
+	<p>Each player starts the game with 5 dice. At the beginning of each round, all the dice are rolled.
+	Players will then take turns in a circle. <br/><br/>On your turn, you guess 2 numbers: the first number is a number
+ between 1 and the total number of dice in play (quantity); and the second number is a die face (1-6).<br/><br/> So if you guess
+ "2 3" that means out of all the dice in play (the ones you can see and the ones you can't) you think that there 
+are at least 2 dice with a 3 facing up. Play then continues in a circle.<br/><br/> The next player must make a guess where 
+either one or both of the numbers are higher than the last guess (neither number can go down).
+ <br/><br/>Other players can call you out if they think the guess is a lie. When this happens, 
+if what you said was a lie, then you lose a die and if what you said was true then the player that called your bluff 
+loses a die. Then the dice are rerolled and a new round starts (with the player that lost a die). <br/><br/>When you run out
+ of dice then you are out of the game. Last player with dice left wins.</p>
+    </section>
+  </div>
+
+</section>
+
 
   </body>
 </html>
