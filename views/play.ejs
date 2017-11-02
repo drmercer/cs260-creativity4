@@ -47,8 +47,15 @@
 
     <!-- Game History section -->
     <section class="game-history">
-	<div class="history" ng-repeat="g in game.history">
-	  {{g.userId}} {{g.qty}} {{g.side}}
+        <div class="history" ng-repeat="g in game.history">
+            {{g.userId}}
+            <span class="guess" ng-if="g.type === 'guess'">
+                {{g.qty}} {{g.side}}
+            </span>
+            <span class="guess" ng-if="g.type === 'call'">
+                called out {{g.target}}. 
+            </span>
+
         </div>
     </section>
 

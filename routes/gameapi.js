@@ -89,7 +89,7 @@ router.put('/game/play/:gameId/:userId/makeGuess/', function(req, res) {
   if (lastGuess.qty < qty
       || (lastGuess.qty === qty && lastGuess.side < side)) {
     // Add to history
-    game.history.push({userId, qty, side});
+    game.history.push({userId, type: "guess", qty, side});
   } else {
     res.status(400).json({msg: "You need to guess higher."});
     return;
@@ -111,7 +111,10 @@ router.put('/game/play/:gameId/:userId/callBluff/', function(req, res) {
   if (game.players[game.currentTurn] !== userId) throw new Error("Stahp. It's not your turn buddy.");
 
   const last = game.history[game.history.length-1];
-  if (!last) return res.status(400).send({msg:"Cannot call bluff - you're up first!"});
+  if (!last || last.type === "call") {
+    res.status(400).send({msg:"Cannot call bluff - you're up first for this round!"});
+    return;
+  }
 
   var loser;
   if (gameDataStore.isGuessCorrect(gameId, last)) {
@@ -122,6 +125,9 @@ router.put('/game/play/:gameId/:userId/callBluff/', function(req, res) {
     loser = userId;
   }
   gameDataStore.takeDieFromPlayer(gameId, loser);
+
+  // Append to history
+  game.history.push({userId, type: "call", target: last.userId, loser});
 
   gameDataStore.rollDice(gameId);
   res.send(game);
