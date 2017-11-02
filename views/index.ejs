@@ -53,7 +53,7 @@
         <div class="game" ng-repeat="g in games">
             <strong>{{g.id}}:</strong> {{g.players.length}} player<span ng-if="g.players.length > 1">s</span>.
             <div ng-if="g.started">
-                <a target="_blank" href="/play/{{g.id}}">Go to game</a>
+                <a href="/play/{{g.id}}">Go to game</a>
             </div>
             <div ng-if="!g.started">
                 Waiting for more players to join&hellip;
