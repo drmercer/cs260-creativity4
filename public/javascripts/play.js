@@ -5,6 +5,7 @@ function playCtrl($scope, GameApi) {
   const api = new GameApi(cp4_global_uid);
 
   $scope.game = cp4_game;
+  $scope.username = cp4_global_uid;
   const gameId = cp4_game.id;
 
   $scope.dice = [];

@@ -53,14 +53,16 @@
                 {{g.qty}} {{g.side}}
             </span>
             <span class="guess" ng-if="g.type === 'call'">
-                called out {{g.target}}. 
+                called out {{g.target}}. <em>{{g.loser}} lost a die.</em>
             </span>
 
         </div>
     </section>
 
     <!-- Make a Guess section -->
-    <section class="make-guess">
+    <section class="make-guess" ng-if="game.players[game.currentTurn] === username">
+        It's your turn, <strong>{{username}}</strong>!
+
         <form name="takeTurnForm" ng-submit="takeTurn(takeTurnForm.guess)">
             Enter a guess, of the form "# #".
             <input type="text" pattern="\d+ +\d+" ng-model="takeTurnForm.guess"/>
@@ -68,6 +70,9 @@
         </form>
         <strong>OR</strong>
         <button ng-click="takeTurn(false)">Call their bluff</button>
+    </section>
+    <section class="make-guess" ng-if="game.players[game.currentTurn] !== username">
+        It's <strong>{{game.players[game.currentTurn]}}</strong>'s turn.
     </section>
 
    <img ng-if="showObjection" src="/images/giphy.gif"/>
