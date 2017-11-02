@@ -13,9 +13,18 @@ button, input[type="submit"] {
 	padding: 6px;
 	font-weight: bold;
 	text-transform: lowercase;
-	transition: background-color 350ms ease-in-out;
+	transition: background-color 100ms ease-in-out;
 }
 
 button:hover, input[type="submit"]:hover {
 	background-color: rgba(255,255,255,.23);
+}
+
+a {
+	color: white;
+	transition: color 100ms ease-in-out;
+}
+
+a:hover {
+	opacity: .7;
 }
