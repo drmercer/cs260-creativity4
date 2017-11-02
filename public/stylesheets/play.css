@@ -1,6 +1,7 @@
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background-color: red;
 }
 
 a {
@@ -16,6 +17,30 @@ a {
   color: red;
 }
 
+.your-dice {
+  text-align: center;
+}
+
 .dice {
   display: inline-block;
+  padding: 4px;
+}
+
+header {
+  text-align: center;
+}
+
+.column-sections {
+  display: flex;
+  flex-flow; row wrap;
+  justify-contend: stretch;
+}
+
+.col {
+  flex-grow: 1;
+  flex-basis: 0;
+}
+
+.game-history {
+  columns: auto 200px;
 }
