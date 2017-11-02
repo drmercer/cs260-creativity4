@@ -90,6 +90,7 @@ function takeDieFromPlayer(gameId, userId) {
 }
 
 function setCurrentTurn(gameId, userId) {
+	const game = getGameState(gameId);
 	game.currentTurn = game.players.indexOf(userId);
 }
 
