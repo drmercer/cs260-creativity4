@@ -35,8 +35,12 @@
     </header>
 
     <!-- Game Over section (should occupy the whole page) -->
-    <section class="game-finished">
+    <section class="game-finished" ng-if="game.winner &amp;&amp; game.winner === username">
+        You win!
+    </section>
 
+    <section class="game-finished" ng-if="game.winner &amp;&amp; game.winner !== username">
+        You lose haha lol!
     </section>
 
     <!-- Your Dice section -->
