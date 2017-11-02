@@ -85,7 +85,10 @@ router.put('/game/play/:gameId/:userId/makeGuess/', function(req, res) {
   }
 
   // Validate guess
-  const lastGuess = game.history[game.history.length-1] || {qty: 0, side: 0};
+  var lastGuess = game.history[game.history.length-1];
+  if (!lastGuess || lastGuess.type === "call") {
+    lastGuess = {qty: 0, side: 0}
+  }
   if (lastGuess.qty < qty
       || (lastGuess.qty === qty && lastGuess.side < side)) {
     // Add to history
