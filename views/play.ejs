@@ -8,17 +8,18 @@
         const KEY = "uid";
         let id = localStorage.getItem(KEY);
         if (!id) {
-            id = '<%= newUsername %>';
-            localStorage.setItem(KEY, id);
-        }
-        Object.defineProperty(window, 'cp4_global_uid', {
-            configurable: false,
-            enumerable: false,
-            writable: false,
-            value: id,
-        });
+            // No username, so redirect to index
+            window.location = "/";
+        } else {
+            Object.defineProperty(window, 'cp4_global_uid', {
+                configurable: false,
+                enumerable: false,
+                writable: false,
+                value: id,
+            });
 
-        window.cp4_game = <%- JSON.stringify(game) %>;
+            window.cp4_game = <%- JSON.stringify(game) %>;
+        }
     </script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular.min.js"></script>
     <script src="/javascripts/play.js" charset="utf-8"></script>
