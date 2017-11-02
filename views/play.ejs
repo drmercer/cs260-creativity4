@@ -47,11 +47,13 @@
 
     <!-- Game History section -->
     <section class="game-history">
-
+	<div class="history" ng-repeat="g in game.history">
+	  {{g.userId}} {{g.qty}} {{g.side}}
+        </div>
     </section>
 
     <!-- Make a Guess section -->
-    <section class="game-history">
+    <section class="make-guess">
         <form name="takeTurnForm" ng-submit="takeTurn(takeTurnForm.guess)">
             Enter a guess, of the form "# #".
             <input type="text" pattern="\d+ +\d+" ng-model="takeTurnForm.guess"/>
