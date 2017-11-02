@@ -68,7 +68,7 @@ router.get('/game/play/:gameId/:userId/dice/', function(req, res) {
 router.put('/game/play/:gameId/:userId/makeGuess/', function(req, res) {
   const userId = req.params.userId;
   const gameId = req.params.gameId;
-  
+
   const game = gameDataStore.getGameState(gameId);
   if (!game) throw new Error("Game not found!");
 
@@ -101,7 +101,25 @@ router.put('/game/play/:gameId/:userId/makeGuess/', function(req, res) {
 
 router.put('/game/play/:gameId/:userId/callBluff/', function(req, res) {
   const gameId = req.params.gameId;
-  // TODO: Code this endpoint
+  const userId = req.params.userId;
+
+  const game = gameDataStore.getGameState(gameId);
+  if (!game) throw new Error("Game not found!");
+  if (game.players[game.currentTurn] !== userId) throw new Error("Stahp. It's not your turn buddy.");
+
+  const last = game.history.pop();
+  if (!last) return res.status(400).send({msg:"Cannot call bluff - you're up first!"});
+
+  var loser;
+  if (gameDataStore.isGuessCorrect(gameId, last)) {
+    // Guesser wins round, caller loses
+    loser = last.userId;
+  } else {
+    // Caller wins round, guesser loses
+    loser = userId;
+  }
+  gameDataStore.takeDieFromPlayer(gameId, loser);
+
   gameDataStore.rollDice(gameId);
   res.send("Success");
 });
