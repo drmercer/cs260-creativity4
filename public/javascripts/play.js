@@ -7,16 +7,22 @@ function playCtrl($scope, GameApi) {
   $scope.game = cp4_game;
   const gameId = cp4_game.id;
 
+  $scope.dice = [1,2,3,4,5];
+
+  $scope.showObjection = false;
+
   $scope.takeTurn = function(guess) {
     if (!guess) {
       // Call their bluff
+      $scope.showObjection = true;
+      setTimeout(function(){ $scope.showObjection = false}, 2500);
       api.callBluff(gameId);
     } else {
       const parts = guess.split(/\s+/);
       const qty = parseInt(parts[0]);
       const side = parseInt(parts[1]);
       // Make a guess
-      api.makeGuess(gameId, {qty, side});
+      api.makeGuess({qty, side});
     }
   }
 
