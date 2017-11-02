@@ -99,8 +99,7 @@ router.put('/game/play/:gameId/:userId/makeGuess/', function(req, res) {
   }
 
   // Increment turn
-  game.currentTurn++;
-  game.currentTurn %= game.players.length;
+  gameDataStore.incrementGameTurn(gameId);
 
   res.send(game);
 });
@@ -132,10 +131,13 @@ router.put('/game/play/:gameId/:userId/callBluff/', function(req, res) {
   // Append to history
   game.history.push({userId, type: "call", target: last.userId, loser});
 
-  // Loser goes next
-  gameDataStore.setCurrentTurn(gameId, loser);
+  if (!gameDataStore.isGameOver(gameId)) {
+    // Loser goes next
+    gameDataStore.setCurrentTurn(gameId, loser);
 
-  gameDataStore.rollDice(gameId);
+    gameDataStore.rollDice(gameId);
+  }
+
   res.send(game);
 });
 

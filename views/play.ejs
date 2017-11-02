@@ -28,7 +28,7 @@
   </head>
   <body ng-app='app' ng-controller='playCtrl'>
 
-    <header>Playing game <%= game.id %></header>
+    <header>Playing game <%= game.id %>. {{game.totalDiceLeft}} dice left</header>
 
     <header class="connectionErr" ng-if="connectionErr">
         A problem occurred communicating with the server. Please check your connection.
