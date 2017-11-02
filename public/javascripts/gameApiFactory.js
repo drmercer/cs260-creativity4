@@ -34,7 +34,7 @@ angular
     },
 
     makeGuess: function(gameId, {qty, side}) {
-      return $http.put(API_ROOT+"play/"+gameId+"/makeGuess/", {qty, side})
+      return $http.put(API_ROOT+"play/" + gameId + "/" + this._user + "/makeGuess/", {qty, side})
         .then(resp => resp.data);
     },
 
