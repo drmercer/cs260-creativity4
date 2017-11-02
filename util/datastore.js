@@ -2,6 +2,8 @@ const idgen = require('./idgen');
 
 const games = [];
 
+const gamePlayerDice = {};
+
 function makeNew(owner) {
 	const newGame = {
 		id: idgen.newGameID(),
@@ -25,6 +27,14 @@ function listForUser(username) {
 	return games.filter(game => game.players.includes(username));
 }
 
+function startGame(id) {
+	const game = getGameState(id);
+	game.started = true;
+	const dice = {};
+	game.players.forEach(p => dice[p] = []);
+	gamePlayerDice[id] = dice;
+}
+
 function listAllGames() {
 	return games;
 }
@@ -33,5 +43,6 @@ module.exports = {
 	getGameState,
 	makeNew,
 	listForUser,
+	startGame,
 	listAllGames,
 };

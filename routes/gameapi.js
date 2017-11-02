@@ -48,7 +48,7 @@ router.get('/game/start/:gameId', function(req, res) {
   const gameId = req.params.gameId;
   var game = gameDataStore.getGameState(gameId);
   if (game) {
-    game.started = true;
+    gameDataStore.startGame(gameId);
     res.json(gameId);
   } else {
     res.status(400).json({ msg: "No game with ID " + gameId })
