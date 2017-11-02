@@ -1,7 +1,7 @@
 angular.module('app', [])
   .controller('appCtrl', appCtrl)
 
-function appCtrl($scope, GameApi) {
+function appCtrl($scope, GameApi, Poller) {
   const api = new GameApi(cp4_global_uid);
 	$scope.username = cp4_global_uid;
   $scope.games = [];
@@ -19,7 +19,8 @@ function appCtrl($scope, GameApi) {
     .then(() => api.listGames())
     .then(games => $scope.games = games);
 
-  $scope.refreshGames = refreshGames;
+  const poller = new Poller(refreshGames);
+  poller.start();
 
   function refreshGames() {
     return api.listGames()
