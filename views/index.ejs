@@ -62,8 +62,11 @@
         <h2>Your games</h2>
         <div class="game" ng-repeat="g in games">
             <strong>{{g.id}}:</strong> {{g.players.length}} player<span ng-if="g.players.length > 1">s</span>.
-            <div ng-if="g.started">
+            <div ng-if="g.started && !g.winner">
                 <a href="/play/{{g.id}}">Go to game</a>
+            </div>
+            <div ng-if="g.winner">
+                <p>This game has ended! {{g.winner}} was the winner!</p>
             </div>
             <div ng-if="!g.started">
                 Waiting for more players to join&hellip;

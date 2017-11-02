@@ -30,7 +30,7 @@
   </head>
   <body ng-app='app' ng-controller='playCtrl'>
 
-    <header>Playing game <%= game.id %>. {{game.totalDiceLeft}} dice left</header>
+    <header>Playing game <%= game.id %>.</header>
 
     <header class="connectionErr" ng-if="connectionErr">
         A problem occurred communicating with the server. Please check your connection.
@@ -57,6 +57,7 @@
 <div class="column-sections">
   <div class="col">
 
+    There are {{game.totalDiceLeft}} dice left in the game.
     <!-- Make a Guess section -->
     <section class="make-guess" ng-if="game.players[game.currentTurn] === username">
         It's your turn, <strong>{{username}}</strong>!
@@ -100,8 +101,8 @@
  "2 3" that means out of all the dice in play (the ones you can see and the ones you can't) you think that there 
 are at least 2 dice with a 3 facing up. Play then continues in a circle.<br/><br/> The next player must make a guess where 
 either one or both of the numbers are higher than the last guess (neither number can go down).
- <br/><br/>Other players can call you out if they think the guess is a lie. When this happens, 
-if what you said was a lie, then you lose a die and if what you said was true then the player that called your bluff 
+ <br/><br/>On their turns, other players can call someone out if they think the last guess was a lie. When this happens, 
+if what was said was a lie, then the player who made the guess loses a die; and if what was said was true then the player that called the bluff 
 loses a die. Then the dice are rerolled and a new round starts (with the player that lost a die). <br/><br/>When you run out
  of dice then you are out of the game. Last player with dice left wins.</p>
     </section>
