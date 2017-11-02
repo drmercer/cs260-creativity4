@@ -72,7 +72,10 @@ router.put('/game/play/:gameId/:userId/makeGuess/', function(req, res) {
   const game = gameDataStore.getGameState(gameId);
   if (!game) throw new Error("Game not found!");
 
-  if (game.players[game.currentTurn] !== userId) throw new Error("Stahp. It's not your turn buddy.");
+  if (game.players[game.currentTurn] !== userId) {
+    res.status(400).json({msg: "It's not your turn!"});
+    return;
+  }
 
   const {qty, side} = req.body;
 
