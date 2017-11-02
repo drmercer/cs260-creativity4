@@ -15,3 +15,7 @@ a {
   background-color: salmon;
   color: red;
 }
+
+.dice {
+  display: inline-block;
+}

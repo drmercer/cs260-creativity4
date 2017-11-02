@@ -19,6 +19,11 @@ function makeNew(owner) {
 	return newGame;
 }
 
+function getRandInt() {
+  var randomNumber = Math.floor(Math.random()*6) + 1;
+  return randomNumber;
+}
+
 function getGameState(id) {
 	return games.find(game => game.id === id) || null;
 }
