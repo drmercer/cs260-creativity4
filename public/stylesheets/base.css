@@ -1,6 +1,14 @@
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-  background-color: lightblue;
+  background-color: CORNFLOWERBLUE;
 	color: white;
+}
+
+button {
+	border: 1px solid currentcolor;
+	color: inherit;
+	background: none;
+	border-radius: 5px;
+	padding: 6px;
 }
