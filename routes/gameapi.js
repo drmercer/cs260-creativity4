@@ -122,10 +122,10 @@ router.put('/game/play/:gameId/:userId/callBluff/', function(req, res) {
   var loser;
   if (gameDataStore.isGuessCorrect(gameId, last)) {
     // Guesser wins round, caller loses
-    loser = last.userId;
+    loser = userId;
   } else {
     // Caller wins round, guesser loses
-    loser = userId;
+    loser = last.userId;
   }
   gameDataStore.takeDieFromPlayer(gameId, loser);
 
