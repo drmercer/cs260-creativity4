@@ -77,11 +77,11 @@
     <!-- Game History section -->
     <section class="game-history">
         <div class="history" ng-repeat="g in game.history">
-            {{g.userId}}
+            <span class="user">{{g.userId}}</span>
             <span class="guess" ng-if="g.type === 'guess'">
-                {{g.qty}} {{g.side}}
+                guessed "{{g.qty}} {{g.side}}"
             </span>
-            <span class="guess" ng-if="g.type === 'call'">
+            <span class="call" ng-if="g.type === 'call'">
                 called out {{g.target}}. <em>{{g.loser}} lost a die.</em>
             </span>
 

@@ -39,7 +39,7 @@ header {
 }
 
 .game-finished ~ * {
-  display: none;
+  display: none !important;
 }
 
 .game-finished.win {
@@ -59,4 +59,16 @@ header {
 .col {
   flex-grow: 1;
   flex-basis: 0;
+}
+
+.make-guess {
+  margin: 6px;
+}
+
+.history {
+  margin: 10px;
+}
+
+.history .user {
+  font-weight: bold;
 }
