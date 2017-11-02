@@ -35,11 +35,11 @@
     </header>
 
     <!-- Game Over section (should occupy the whole page) -->
-    <section class="game-finished" ng-if="game.winner &amp;&amp; game.winner === username">
+    <section class="game-finished win" ng-if="game.winner &amp;&amp; game.winner === username">
         You win!
     </section>
 
-    <section class="game-finished" ng-if="game.winner &amp;&amp; game.winner !== username">
+    <section class="game-finished lose" ng-if="game.winner &amp;&amp; game.winner !== username">
         You lose haha lol!
     </section>
 

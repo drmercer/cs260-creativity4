@@ -30,17 +30,42 @@ header {
   text-align: center;
 }
 
+.game-finished {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+
+  color: white;
+  font-weight: bold;
+
+  padding: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22vmin;
+}
+
+.game-finished ~ * {
+  display: none;
+}
+
+.game-finished.win {
+  background-color: palegreen;
+}
+
+.game-finished.lose {
+  background-color: salmon;
+}
+
 .column-sections {
   display: flex;
-  flex-flow; row wrap;
-  justify-contend: stretch;
+  flex-flow: row wrap;
+  justify-content: stretch;
 }
 
 .col {
   flex-grow: 1;
   flex-basis: 0;
-}
-
-.game-history {
-  columns: auto 200px;
 }
