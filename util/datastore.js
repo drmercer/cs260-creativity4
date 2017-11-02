@@ -74,6 +74,21 @@ function getPlayerDice(gameId, playerId) {
 	return game[playerId];
 }
 
+function isGuessCorrect(gameId, {qty, side}) {
+	const dice = gamePlayerDice[gameId];
+	var count = 0;
+	Object.keys(dice).forEach(p => {
+		dice[p].forEach(d => {
+			if (d === side) count++;
+		});
+	});
+	return count >= qty;
+}
+
+function takeDieFromPlayer(gameId, userId) {
+	gamePlayerDice[gameId][userId] = gamePlayerDice[gameId][userId].slice(1);
+}
+
 module.exports = {
 	getGameState,
 	makeNew,
@@ -82,4 +97,6 @@ module.exports = {
 	listAllGames,
 	getPlayerDice,
 	rollDice,
+	isGuessCorrect,
+	takeDieFromPlayer,
 };

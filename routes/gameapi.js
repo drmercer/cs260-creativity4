@@ -65,15 +65,63 @@ router.get('/game/play/:gameId/:userId/dice/', function(req, res) {
   res.json(dice);
 });
 
-router.put('/game/play/:gameId/makeGuess/', function(req, res) {
-  // TODO: Code this endpoint
-  console.log(req.body);
-  res.send("Stub!");
+router.put('/game/play/:gameId/:userId/makeGuess/', function(req, res) {
+  const userId = req.params.userId;
+  const gameId = req.params.gameId;
+
+  const game = gameDataStore.getGameState(gameId);
+  if (!game) throw new Error("Game not found!");
+
+  if (game.players[game.currentTurn] !== userId) throw new Error("Stahp. It's not your turn buddy.");
+
+  const {qty, side} = req.body;
+
+  if (side < 1 || side > 6) {
+    res.status(400).json({msg: "Invalid side \"" + side + "\""});
+    return;
+  }
+
+  // Validate guess
+  const lastGuess = game.history.pop() || {qty: 0, side: 0};
+  if (lastGuess.qty < qty
+      || (lastGuess.qty === qty && lastGuess.side < side)) {
+    // Add to history
+    game.history.push({userId, qty, side});
+  } else {
+    res.status(400).json({msg: "Unacceptable guess."});
+    return;
+  }
+
+  // Increment turn
+  game.currentTurn++;
+  game.currentTurn %= game.players.length;
+
+  res.send("Success");
 });
 
-router.put('/game/play/:gameId/callBluff/', function(req, res) {
-  // TODO: Code this endpoint
-  res.send("Stub!");
+router.put('/game/play/:gameId/:userId/callBluff/', function(req, res) {
+  const gameId = req.params.gameId;
+  const userId = req.params.userId;
+
+  const game = gameDataStore.getGameState(gameId);
+  if (!game) throw new Error("Game not found!");
+  if (game.players[game.currentTurn] !== userId) throw new Error("Stahp. It's not your turn buddy.");
+
+  const last = game.history.pop();
+  if (!last) return res.status(400).send({msg:"Cannot call bluff - you're up first!"});
+
+  var loser;
+  if (gameDataStore.isGuessCorrect(gameId, last)) {
+    // Guesser wins round, caller loses
+    loser = last.userId;
+  } else {
+    // Caller wins round, guesser loses
+    loser = userId;
+  }
+  gameDataStore.takeDieFromPlayer(gameId, loser);
+
+  gameDataStore.rollDice(gameId);
+  res.send("Success");
 });
 
 module.exports = router;
