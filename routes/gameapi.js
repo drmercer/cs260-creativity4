@@ -60,6 +60,7 @@ router.get('/game/start/:gameId', function(req, res) {
 
 router.put('/game/play/:gameId/makeGuess/', function(req, res) {
   // TODO: Code this endpoint
+  console.log(req.body);
   res.send("Stub!");
 });
 
