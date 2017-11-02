@@ -38,6 +38,8 @@
 	<p>Please play with someone around you. If you must play by yourself, open a new tab in incognito mode, open up a different browser, or use your phone.</p>
     </section>
 
+<div class="column-sections">
+  <div class="col">
     <section>
         <h2>Create game</h2>
         <button ng-click="createGame()">Create a new game</button>
@@ -53,7 +55,8 @@
             <input type="submit" value="Join">
         </form>
     </section>
-
+  </div>
+  <div class="col";
     <section>
         <h2>Your games <button ng-click="refreshGames()">refresh</button></h2>
         <div class="game" ng-repeat="g in games">
@@ -70,6 +73,8 @@
             No games :(
         </div>
     </section>
+  </div>
+</div>
 
   </body>
 </html>

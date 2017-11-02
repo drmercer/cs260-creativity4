@@ -9,3 +9,14 @@ a {
 h1 {
   text-align: center;
 }
+
+.column-sections {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: stretch;
+}
+
+.col {
+  flex-grow: 1;
+  flex-basis: 0;
+}
