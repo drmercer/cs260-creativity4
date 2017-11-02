@@ -32,6 +32,14 @@ angular
       return $http.get(API_ROOT+"get/"+gameId)
         .then(resp => resp.data);
     },
+
+    makeGuess: function(gameId) {
+      console.log("stub");
+    },
+
+    callBluff: function(gameId) {
+      console.log("stub");
+    },
   };
 
   return GameApi;

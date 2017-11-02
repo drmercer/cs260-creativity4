@@ -5,6 +5,23 @@ function playCtrl($scope, GameApi) {
   const api = new GameApi(cp4_global_uid);
 
   $scope.game = cp4_game;
+  const gameId = cp4_game.id;
+
+  $scope.takeTurn = function(guess) {
+    if (!guess) {
+      // Call their bluff
+      api.callBluff(gameId);
+    } else {
+      const parts = guess.split(/\s+/);
+      const qty = parseInt(parts[0]);
+      const side = parseInt(parts[1]);
+      // Make a guess
+      api.makeGuess({qty, side});
+    }
+  }
+
+  //======================================================================
+  //      Refresh and 'connection error' banner
 
   // Set up the initial state of the error banner
   var intervalId;
