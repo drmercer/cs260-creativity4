@@ -8,6 +8,10 @@ function makeNew(owner) {
 		started: false,
 		owner: owner,
 		players: [ owner ],
+
+		currentTurn: 0,
+		history: [],
+		winner: null,
 	};
 	games.push(newGame);
 	return newGame;
